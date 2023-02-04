@@ -7,3 +7,35 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+#card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-evenly;
+
+    width: 100%;
+    border: 1px solid black
+}
+
+.card {
+    /* width: 100px; */
+    height: 100%;
+    margin: 5px;
+    background-color: red;
+    border: 1px solid green;
+
+    transition: 1000ms;
+
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50px;
+}
+
+.card--state-closed {
+    
+}
+
+.card:hover, .card--state-open {
+    flex-basis: 50%;
+}
