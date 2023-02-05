@@ -27,8 +27,7 @@ const createCardsCarousel = ({ carouselId, cardTemplateId }) => {
     cardElement.style.backgroundImage = `url(${imageUrl})`;
     cardElement.onclick = () => selectCard(cardElement);
 
-    const textElement =
-      cardElement.getElementsByClassName("cardTemplate--text")[0];
+    const textElement = cardElement.getElementsByClassName("card--text")[0];
 
     textElement.innerHTML = text;
 
@@ -39,6 +38,11 @@ const createCardsCarousel = ({ carouselId, cardTemplateId }) => {
       text,
       cardElement,
     });
+
+    // open the first one by default
+    if (cards.length === 1) {
+      selectCard(cardElement);
+    }
   };
 
   return {
