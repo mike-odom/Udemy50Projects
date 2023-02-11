@@ -1,8 +1,15 @@
-const createProgressSteps = ({ containerId }) => {
+const createProgressSteps = ({
+  containerId,
+  previousButtonId,
+  nextButtonId,
+}) => {
   const steps = [];
   let currentStep = 0;
 
   const container = document.getElementById(containerId);
+
+  const previousButton = document.getElementById(previousButtonId);
+  const nextButton = document.getElementById(nextButtonId);
 
   const addStep = () => {
     let stepLine = null;
@@ -24,6 +31,7 @@ const createProgressSteps = ({ containerId }) => {
     if (steps.length === 1) {
       selectStep(0);
     }
+    updateButtons();
   };
 
   const selectStep = (selectIndex) => {
@@ -38,15 +46,29 @@ const createProgressSteps = ({ containerId }) => {
       }
     });
     currentStep = selectIndex;
+
+    updateButtons();
+  };
+
+  const updateButtons = () => {
+    previousButton.disabled = currentStep === 0;
+    nextButton.disabled = currentStep === steps.length - 1;
   };
 
   const previousStep = () => {
-    selectStep(currentStep > 0 ? currentStep - 1 : steps.length - 1);
+    if (currentStep > 0) {
+      selectStep(currentStep - 1);
+    }
   };
 
   const nextStep = () => {
-    selectStep(currentStep + 1 < steps.length ? currentStep + 1 : 0);
+    if (currentStep + 1 < steps.length) {
+      selectStep(currentStep + 1);
+    }
   };
+
+  previousButton.addEventListener("click", previousStep);
+  nextButton.addEventListener("click", nextStep);
 
   return {
     addStep,
@@ -55,16 +77,12 @@ const createProgressSteps = ({ containerId }) => {
   };
 };
 
-const progressSteps = createProgressSteps({ containerId: "steps-container" });
+const progressSteps = createProgressSteps({
+  containerId: "steps-container",
+  previousButtonId: "previousButton",
+  nextButtonId: "nextButton",
+});
 progressSteps.addStep();
 progressSteps.addStep();
 progressSteps.addStep();
 progressSteps.addStep();
-
-document
-  .getElementById("previousButton")
-  .addEventListener("click", progressSteps.previousStep);
-
-document
-  .getElementById("nextButton")
-  .addEventListener("click", progressSteps.nextStep);
