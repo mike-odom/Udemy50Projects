@@ -25,7 +25,6 @@ nav {
 
   transform-origin: top left;
   transition: transform 0.5s linear;
-  /* overflow-y: hidden; */
 }
 
 .container.show-nav {
