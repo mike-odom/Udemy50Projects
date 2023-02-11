@@ -25,15 +25,15 @@ nav {
 
   transform-origin: top left;
   transition: transform 0.5s linear;
+  /* overflow-y: hidden; */
 }
 
 .container.show-nav {
   transform: rotate(-20deg);
 }
 
-.container.show-nav + nav li {
-  transform: translateX(0);
-  transition-delay: 0.3s;
+.container.show-nav .circle {
+  transform: rotate(-70deg);
 }
 
 .circle-container {
@@ -49,6 +49,7 @@ nav {
   width: 200px;
 
   border-radius: 50%;
+  transition: transform 0.5s linear;
 }
 
 .circle button {
@@ -121,10 +122,17 @@ nav ul li {
   transition: transform 0.4s ease-in;
 }
 
+.container.show-nav + nav li {
+  transform: translateX(0);
+  transition-delay: 0.1s;
+}
+
 nav ul li + li {
   margin-left: 15px;
+  transform: translateX(-150%);
 }
 
 nav ul li + li + li {
   margin-left: 30px;
+  transform: translateX(-200%);
 }
