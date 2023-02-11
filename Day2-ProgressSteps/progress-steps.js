@@ -13,10 +13,16 @@ const createProgressSteps = ({
 
   const addStep = () => {
     let stepLine = null;
+    let stepLineHighlight = null;
+
     if (steps.length) {
-      stepLine = document.createElement("span");
+      stepLine = document.createElement("div");
       stepLine.classList.add("stepLine");
       container.appendChild(stepLine);
+
+      stepLineHighlight = document.createElement("div");
+      stepLineHighlight.classList.add("stepLineHighlight");
+      stepLine.appendChild(stepLineHighlight);
     }
     const stepDot = document.createElement("span");
     stepDot.innerHTML = steps.length + 1;
@@ -24,8 +30,9 @@ const createProgressSteps = ({
     container.appendChild(stepDot);
 
     steps.push({
-      stepLine,
       stepDot,
+      stepLine,
+      stepLineHighlight,
     });
 
     if (steps.length === 1) {
