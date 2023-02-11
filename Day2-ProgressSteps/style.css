@@ -1,9 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+#steps-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#steps-container .stepDot--selected ~ .stepDot {
+  background: red;
+}
+
+.stepDot {
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+
+  transition: 2000ms;
+}
+
+.stepDot--visited {
+  border: 1px solid blue;
+}
+
+.stepLine {
+  width: 40px;
+  height: 4px;
+
+  transition: 2000ms;
+}
+
+.stepLine--visited {
+  background: blue;
 }
