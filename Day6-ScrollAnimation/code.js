@@ -1,49 +1,59 @@
-const body = document.querySelector("body");
-const contentCards = document.querySelectorAll(".content_card");
+const initVanillaScroll = () => {
+  const body = document.querySelector("body");
+  const contentCards = document.querySelectorAll(".content_card");
 
-const onScroll = () => {
-  contentCards.forEach((card) => {
-    const cardRect = card.getBoundingClientRect();
+  const onScroll = () => {
+    contentCards.forEach((card) => {
+      const cardRect = card.getBoundingClientRect();
 
-    if (cardRect.top < window.innerHeight - 100) {
-      console.log("visible");
-      card.classList.add("visible");
-    }
+      if (cardRect.top < window.innerHeight - 100) {
+        console.log("visible");
+        card.classList.add("visible");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", onScroll);
+
+  onScroll();
+
+  window.addEventListener("load", function (event) {
+    // Enable animation after the page loads so the initial cards are static
+    contentCards.forEach((card) => {
+      card.classList.add("animated");
+    });
   });
 };
 
-window.addEventListener("scroll", onScroll);
+// I couldn't get this to work right, still playing
+const initIntersectionObserverScroll = () => {
+  const contentCards = document.querySelectorAll(".content_card");
 
-onScroll();
+  let options = {
+    root: document.querySelector(".content"),
+    // extreme margins hack to possibly see content on the sides?
+    rootMargin: "0px 4000px 0px 4000px",
+    threshold: 0.75,
+  };
 
-window.addEventListener("load", function (event) {
-  // Enable animation after the page loads so the initial cards are static
-  contentCards.forEach((card) => {
-    card.classList.add("animated");
-  });
-});
+  const onScroll = (entries) => {
+    entries.forEach((entry) => {
+      console.log("entry", entry);
+      if (
+        entry.isIntersecting ||
+        entry.target.getBoundingClientRect().top < 0
+      ) {
+        console.log("isIntersecting", entry.intersectionRatio);
 
-// Tried InteractionObserver
-// const onScroll = (entries) => {
-//   console.log("scrolling");
-//   entries.forEach((entry) => {
-//     if (entry.isIntersecting) {
-//       console.log("isIntersecting");
+        entry.target.classList.add("visible");
+      }
+    });
+  };
 
-//       entry.classList.addClass("visible");
-//     }
-//   });
-// };
+  const observer = new IntersectionObserver(onScroll, options);
 
-// let options = {
-//   root: document.querySelector("body"),
-//   rootMargin: "0px",
-//   threshold: 1.0,
-// };
+  contentCards.forEach((contentCard) => observer.observe(contentCard));
+};
 
-// let observer = new IntersectionObserver(onScroll, options);
-
-// contentCards.forEach((contentCard) => observer.observe(contentCard));
-
-// const showVisibleContentCards = () => {};
-// console.log("contentCards", contentCards);
+initVanillaScroll();
+// initIntersectionObserverScroll();
