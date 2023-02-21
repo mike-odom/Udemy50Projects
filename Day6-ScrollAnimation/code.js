@@ -5,19 +5,23 @@ const onScroll = () => {
   contentCards.forEach((card) => {
     const cardRect = card.getBoundingClientRect();
 
-    console.log(cardRect.top, window.innerHeight);
-
     if (cardRect.top < window.innerHeight - 100) {
       console.log("visible");
       card.classList.add("visible");
     }
-    // console.log(card.getBoundingClientRect());
   });
 };
 
 window.addEventListener("scroll", onScroll);
 
 onScroll();
+
+window.addEventListener("load", function (event) {
+  // Enable animation after the page loads so the initial cards are static
+  contentCards.forEach((card) => {
+    card.classList.add("animated");
+  });
+});
 
 // Tried InteractionObserver
 // const onScroll = (entries) => {

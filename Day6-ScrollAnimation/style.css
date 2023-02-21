@@ -17,6 +17,25 @@ body {
   overflow: hidden;
 }
 
+.content_card {
+  background: rgb(28, 100, 176);
+  color: white;
+  display: flex;
+  /* text-align: center; */
+  align-items: center;
+  justify-content: center;
+
+  width: 50%;
+  height: 200px;
+  padding: 20px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.content_card.animated {
+  transition-duration: 1s;
+}
+
 .content_card:nth-child(even) {
   transform: translateX(150%);
 }
@@ -27,20 +46,4 @@ body {
 
 .content_card.visible {
   transform: translateX(0);
-}
-
-.content_card {
-  background: rgb(28, 100, 176);
-  color: white;
-  display: flex;
-  /* text-align: center; */
-  align-items: center;
-  justify-content: center;
-
-  transition-duration: 1s;
-  width: 50%;
-  height: 200px;
-  padding: 20px;
-  margin: 5px;
-  border-radius: 10px;
 }
